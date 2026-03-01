@@ -32,3 +32,45 @@ function calculate() {
 calculate();
 
 
+// toggling
+function togglingStyle(id) {
+
+    allFilteringBtn.classList.add("bg-gray-300", "text-black");
+    interviewFilteringBtn.classList.add("bg-gray-300", "text-black");
+    rejectedFilteringBtn.classList.add("bg-gray-300", "text-black");
+
+    allFilteringBtn.classList.remove("bg-amber-300", "text-white");
+    interviewFilteringBtn.classList.remove("bg-amber-300", "text-white");
+    rejectedFilteringBtn.classList.remove("bg-amber-300", "text-white");
+
+    const clickedBtn = document.getElementById(id);
+
+    clickedBtn.classList.remove("bg-gray-300", "text-black");
+    clickedBtn.classList.add("bg-amber-300", "text-white");
+
+    currentStatus = id;
+    emptyInfo.classList.add("hidden");
+    if(currentStatus === "interview-filtering-btn"){
+        allCardsSection.classList.add("hidden");
+        filterSection.classList.remove("hidden");
+        renderInterview();
+        if(interviewList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
+
+    } else if (currentStatus === "all-filtering-btn"){
+        allCardsSection.classList.remove("hidden");
+        filterSection.classList.add("hidden");
+    emptyInfo.classList.add("hidden");
+         
+    } else if (currentStatus === "rejected-filtering-btn") {
+        allCardsSection.classList.add("hidden");
+        filterSection.classList.remove("hidden");
+        renderRejected();
+        if(rejectedList.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
+    }
+}
+togglingStyle("all-filtering-btn");
+
