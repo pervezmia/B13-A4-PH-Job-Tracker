@@ -117,6 +117,37 @@ function handleCard (event) {
         }
         calculate();
 
+    } else if (warningBtn) {  //warning Btn event
+        const parentNode = event.target.closest(".card-item")
+
+        const title = parentNode.querySelector(".title-of-card").innerText;
+        const skill = parentNode.querySelector(".skill-of-card").innerText;
+        const salary = parentNode.querySelector(".salary-of-card").innerText;
+        const status = parentNode.querySelector(".status-of-card").innerText;
+        const description = parentNode.querySelector(".description-of-card").innerText;
+
+        const cardInfo = {
+            title,
+            skill,
+            salary,
+            status: "Rejected",
+            description
+        }
+
+
+
+        const existWarning = rejectedList.find(item => item.title === cardInfo.title);
+
+
+        if (!existWarning) {
+            rejectedList.push(cardInfo);
+        }
+
+        interviewList = interviewList.filter(item => item.title != cardInfo.title);
+        if(currentStatus === "interview-filtering-btn"){
+            renderInterview();
+        }
+        calculate();
     }
 }
 
