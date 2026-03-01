@@ -148,6 +148,20 @@ function handleCard (event) {
             renderInterview();
         }
         calculate();
+    } else if (deleteBtn) {
+        const parentNode = event.target.closest(".card-item");
+        const parent = parentNode.parentNode;
+        console.log(parent);
+        const title = parentNode.querySelector(".title-of-card").innerText;
+        parentNode.remove();
+        if(parent.children.length === 0){
+            emptyInfo.classList.remove("hidden");
+         }
+        interviewList = interviewList.filter(item => item.title !== title);
+        rejectedList = rejectedList.filter(item => item.title !== title);
+
+        calculate();
+
     }
 }
 
