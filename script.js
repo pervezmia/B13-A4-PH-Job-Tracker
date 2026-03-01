@@ -74,3 +74,52 @@ function togglingStyle(id) {
 }
 togglingStyle("all-filtering-btn");
 
+
+
+//event delegation orthat parent a click kore btn child dhore kaj korsi
+
+filterSection.addEventListener("click", handleCard)
+allCardsSection.addEventListener("click", handleCard)
+    
+function handleCard (event) {
+    const successBtn = event.target.closest(".success-btn-of-card");
+    const warningBtn = event.target.closest(".warning-btn-of-card");
+    const deleteBtn = event.target.closest(".delete-btn-of-card");
+
+
+    if (successBtn) {  //success Btn event
+        const parentNode = event.target.closest(".card-item")
+
+        const title = parentNode.querySelector(".title-of-card").innerText;
+        const skill = parentNode.querySelector(".skill-of-card").innerText;
+        const salary = parentNode.querySelector(".salary-of-card").innerText;
+        const status = parentNode.querySelector(".status-of-card").innerText;
+        const description = parentNode.querySelector(".description-of-card").innerText;
+
+        const cardInfo = {
+            title,
+            skill,
+            salary,
+            status: "Interview",
+            description
+        }
+
+
+
+        const existInterview = interviewList.find(item => item.title === cardInfo.title);
+
+        if (!existInterview) {
+            interviewList.push(cardInfo);
+        }
+        rejectedList = rejectedList.filter(item => item.title != cardInfo.title);
+        if(currentStatus === "rejected-filtering-btn"){
+            renderRejected();
+        }
+        calculate();
+
+    }
+}
+
+
+
+
